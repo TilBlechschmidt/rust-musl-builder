@@ -178,7 +178,7 @@ ADD sudoers /etc/sudoers.d/nopasswd
 #
 # You should be able to switch back to `USER root` from another `Dockerfile`
 # using this image if you need to do so.
-USER rust
+ENV HOME=/home/rust
 RUN mkdir -p /home/rust/libs /home/rust/src /home/rust/.cargo && \
     ln -s /opt/rust/cargo/config /home/rust/.cargo/config && \
     git config --global credential.https://github.com.helper ghtoken
