@@ -167,6 +167,8 @@ ENV X86_64_UNKNOWN_LINUX_MUSL_OPENSSL_DIR=/usr/local/musl/ \
     LIBZ_SYS_STATIC=1 \
     TARGET=musl
 
+RUN ln -s /usr/local/musl-x86_64/bin/x86_64-linux-musl-ar /usr/bin/musl-ar
+
 # Install some useful Rust tools from source. This will use the static linking
 # toolchain, but that should be OK.
 #
@@ -185,7 +187,7 @@ ADD sudoers /etc/sudoers.d/nopasswd
 #
 # You should be able to switch back to `USER root` from another `Dockerfile`
 # using this image if you need to do so.
-USER rust
+ENV HOME=/home/rust
 RUN mkdir -p /home/rust/libs /home/rust/src /home/rust/.cargo && \
     ln -s /opt/rust/cargo/config /home/rust/.cargo/config && \
     git config --global credential.https://github.com.helper ghtoken
